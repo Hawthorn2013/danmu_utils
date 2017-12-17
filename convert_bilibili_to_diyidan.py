@@ -1,3 +1,4 @@
+# !/usr/bin/python3
 import sys
 import os
 import danmu_diyidan_in
@@ -33,6 +34,7 @@ def convert_file(filename):
     print('Success generate file: "%s".' % out_filename)
     return True
 
+
 def convert_dir(dirname):
     for filename in os.listdir(dirname):
         if not os.path.isfile(filename):
@@ -40,6 +42,7 @@ def convert_dir(dirname):
         if os.path.splitext(filename)[1] != '.dydjson':
             continue
         convert_file(filename)
+
 
 if __name__ == '__main__':
     if len(sys.argv) > 1:
@@ -51,3 +54,4 @@ if __name__ == '__main__':
                 convert_dir(argv_item)
     else:
         convert_dir('.')
+    os.system('pause')
