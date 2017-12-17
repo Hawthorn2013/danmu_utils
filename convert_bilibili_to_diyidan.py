@@ -37,6 +37,7 @@ def convert_file(filename):
 
 def convert_dir(dirname):
     for filename in os.listdir(dirname):
+        filename = os.path.join(dirname, filename)
         if not os.path.isfile(filename):
             continue
         if os.path.splitext(filename)[1] != '.dydjson':
