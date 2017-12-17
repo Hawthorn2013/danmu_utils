@@ -1,13 +1,13 @@
 import urllib.request
 import zlib
 
+
 class danmu_bilibili_download(object):
     def deflate(self, data):
         try:
             return zlib.decompress(data, -zlib.MAX_WBITS)
         except zlib.error:
             return zlib.decompress(data)
-
 
     def danmu_download(self, id):
         url = 'https://comment.bilibili.com/%s.xml' % id
