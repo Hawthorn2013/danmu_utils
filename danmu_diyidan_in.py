@@ -15,6 +15,7 @@ def danmu_in(danmu):
         danmu_common['list'].append(entry_common)
     return danmu_common
 
+
 def entry_in(entry):
     entry_common = {}
     try:

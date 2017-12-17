@@ -19,7 +19,7 @@ def convert_file(filename):
     danmu_bilibili = danmu_bilibili_out.danmu_out(danmu_common)
     if danmu_bilibili == None:
         return False
-    #Determine output file name
+    # Determine output file name
     tmp_1 = os.path.splitext(filename)
     if tmp_1[1] == '.dydjson':
         out_filename = tmp_1[0] + '.xml'

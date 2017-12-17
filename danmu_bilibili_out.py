@@ -13,6 +13,7 @@ def danmu_out(danmu_common):
     danmu_bilibili = xml.toprettyxml(encoding='UTF-8')
     return danmu_bilibili
 
+
 def entry_out(entry_common):
     xml = minidom.Document()
     try:
