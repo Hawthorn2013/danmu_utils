@@ -5,3 +5,5 @@
 *.dydjson
 *.xmllist
 *.dydlist
+__pycache__
+test.py
