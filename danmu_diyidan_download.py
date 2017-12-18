@@ -41,7 +41,7 @@ class danmu_diyidan_download(object):
     @staticmethod
     def danmu_download_file(line):
         line_params = line.strip('\n').split('\t')
-        print('Start process item: "%s".' % line)
+        print('Start process item: "%s".' % line.strip('\n'))
         if len(line_params) < 2:
             return False
         if not line_params[0].isdecimal():
