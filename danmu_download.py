@@ -33,18 +33,18 @@ class danmu_download(object):
             os.mkdir(out_dir)
         try:
             with open(filename, encoding='utf8') as f:
-                for id in f:
-                    id = id.strip('\n')
-                    tmp_2 = id.split('\t')
+                for line in f:
+                    line = line.strip('\n')
+                    line_params = line.split('\t')
                     print('Start process id: "%s" in list file.' % filename)
-                    if not tmp_2[0].isdecimal():
+                    if not line_params[0].isdecimal():
                         continue
-                    danmu = self.danmu_download.danmu_download(tmp_2[0])
+                    danmu = self.danmu_download.danmu_download(line_params[0])
                     if danmu == None:
                         continue
-                    out_filename = tmp_2[0] + '.' + self.extname_danmu
-                    if len(tmp_2) > 1:
-                        out_filename = '%s-%s' % (tmp_2[1], out_filename)
+                    out_filename = line_params[0] + '.' + self.extname_danmu
+                    if len(line_params) > 1:
+                        out_filename = '%s-%s' % (line_params[1], out_filename)
                     try:
                         with open(os.path.join(out_dir, out_filename), mode='wb') as f2:
                             f2.write(danmu)
