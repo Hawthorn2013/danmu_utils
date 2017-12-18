@@ -39,15 +39,21 @@ class danmu_download(object):
                     print('Start process id: "%s" in list file.' % filename)
                     if not line_params[0].isdecimal():
                         continue
-                    danmu = self.danmu_download.danmu_download(line_params[0])
-                    if danmu == None:
-                        continue
-                    out_filename = line_params[0] + '.' + self.extname_danmu
+                    videoId = line_params[0]
                     if len(line_params) > 1:
-                        out_filename = '%s-%s' % (line_params[1], out_filename)
+                        if not line_params[1].isdecimal():
+                            continue
+                        postId = line_params[1]
+                    danmu_videoId = self.danmu_download.danmu_download(videoId)
+                    if danmu_videoId == None:
+                        continue
+                    if postId != None:
+                        out_filename = '%s-%s.%s' % (postId, videoId, self.extname_danmu)
+                    else:
+                        out_filename = '-%s.%s' % (videoId, self.extname_danmu)
                     try:
                         with open(os.path.join(out_dir, out_filename), mode='wb') as f2:
-                            f2.write(danmu)
+                            f2.write(danmu_videoId)
                     except Exception as e:
                         print(e)
                         continue
