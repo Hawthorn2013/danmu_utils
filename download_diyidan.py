@@ -5,7 +5,8 @@ import danmu_download
 import danmu_diyidan_download
 
 if __name__ == '__main__':
-    danmu_download_1 = danmu_download.danmu_download(danmu_diyidan_download.danmu_diyidan_download(), 'dydjson',
+    danmu_download_1 = danmu_download.danmu_download(danmu_diyidan_download.danmu_diyidan_download(param='videoId'),
+                                                     'dydjson',
                                                      'dydlist')
     if len(sys.argv) > 1:
         for i in range(1, len(sys.argv)):
