@@ -18,12 +18,24 @@ def danmu_in(danmu):
 
 def entry_in(entry):
     entry_common = {}
-    try:
-        entry_common['text'] = entry['text']
-        entry_common['time'] = entry['time'] / 10
-        entry_common['color'] = int(entry['color'].split('#')[1], 16)
-        entry_common['sender'] = entry['danmakuId']
-    except Exception as e:
-        print(e)
+    if 'text' in entry:
+        try:
+            entry_common['text'] = entry['text']
+            entry_common['time'] = entry['time'] / 10
+            entry_common['color'] = int(entry['color'].split('#')[1], 16)
+            entry_common['sender'] = entry['danmakuId']
+        except Exception as e:
+            print(e)
+            return None
+    elif 'danmakuContent' in entry:
+        try:
+            entry_common['text'] = entry['danmakuContent']
+            entry_common['time'] = entry['danmakuTime'] / 1000
+            entry_common['color'] = entry['danmakuTextColor']
+            entry_common['sender'] = entry['danmakuId']
+        except Exception as e:
+            print(e)
+            return None
+    else:
         return None
     return entry_common
