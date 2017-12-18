@@ -5,9 +5,9 @@ import danmu_diyidan_download
 import cmdparam_download
 
 if __name__ == '__main__':
-    danmu_download_1 = cmdparam_download.cmdparam_download(danmu_diyidan_download.danmu_diyidan_download(param='videoId'),
-                                                     'dydjson',
-                                                     'dydlist')
+    danmu_download_1 = cmdparam_download.cmdparam_download(danmu_diyidan_download.danmu_diyidan_download(),
+                                                           'dydjson',
+                                                           'dydlist')
     if len(sys.argv) > 1:
         for i in range(1, len(sys.argv)):
             argv_item = sys.argv[i]
