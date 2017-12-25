@@ -1,5 +1,6 @@
 import urllib.request
 import zlib
+import time
 
 
 class danmu_bilibili_download(object):
@@ -28,7 +29,7 @@ class danmu_bilibili_download(object):
         return res
 
     @staticmethod
-    def danmu_download_file(line):
+    def danmu_download_file(line, ts=False):
         line_params = line.strip('\n').split('\t')
         print('Start process item: "%s".' % line.strip('\n'))
         if len(line_params) < 1:
@@ -36,9 +37,13 @@ class danmu_bilibili_download(object):
         if not line_params[0].isdecimal():
             return False
         aid = line_params[0]
+        timestamp = time.strftime('%Y%m%d%H%M%S', time.localtime())
         res = danmu_bilibili_download.danmu_download(aid=aid)
         if 'aid' in res:
-            out_filename = '%s.%s' % (aid, 'xml')
+            out_filename = aid
+            if ts:
+                out_filename = out_filename + '_' + timestamp
+            out_filename = out_filename + '.' + 'xml'
             try:
                 with open(out_filename, mode='wb') as f:
                     f.write(res['aid'])
