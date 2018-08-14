@@ -42,8 +42,8 @@ class danmu_diyidan_download(object):
             try:
                 danmu_json = json.loads(danmu)
                 if danmu_json["count"] == 0:
-                    print("Section download finished: %s" % i)
-                    break;
+                    print("Section download finished: %s" % videoId)
+                    break
             except Exception as e:
                 print(e)
                 break
