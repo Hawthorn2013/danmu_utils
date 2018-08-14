@@ -21,10 +21,11 @@ def entry_in(entry):
     try:
         entry_common['text'] = entry['content']
         entry_common['time'] = entry['playat'] / 1000
-        propertis = json.loads(entry["propertis"])
-        if "color" in propertis.keys():
-            entry_common['color'] = int(propertis["color"])
-        else:
+        if (entry["propertis"] != ""):
+            propertis = json.loads(entry["propertis"])
+            if "color" in propertis.keys():
+                entry_common['color'] = int(propertis["color"])
+        if "color" not in entry_common:
             entry_common['color'] = 16777215
         entry_common['sender'] = entry['uid']
     except Exception as e:
