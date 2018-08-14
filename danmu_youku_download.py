@@ -49,7 +49,7 @@ class danmu_diyidan_download(object):
                 break
             try:
                 danmu_collect["count"] += danmu_json["count"]
-                danmu_collect["result"].append(danmu_json["result"])
+                danmu_collect["result"].extend(danmu_json["result"])
             except Exception as e:
                 print(e)
                 break
