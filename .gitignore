@@ -7,3 +7,5 @@
 *.dydlist
 __pycache__
 test.py
+*.yklist
+*.ykjson
