@@ -5,8 +5,8 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="danmu_utils",
-    version="2.3.0",
-    author="Example Author",
+    version="2.3.1",
+    author="Hawthorn2013",
     author_email="hawthorn7dd@hotmail.com",
     description="Danmu utils support download and convert danmu.",
     long_description=long_description,
