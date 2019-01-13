@@ -9,3 +9,6 @@ __pycache__
 test.py
 *.yklist
 *.ykjson
+build/
+danmu_utils.egg-info/
+dist/
