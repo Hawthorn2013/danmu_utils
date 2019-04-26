@@ -5,6 +5,7 @@ class BilibiliGenerator:
     def __init__(self):
         self.root = minidom.Document()
         self.entry_container = self.root.createElement('i')
+        self.root.appendChild(self.entry_container)
 
     def append(self, text, send_time, type=1, size=25, color=0xFFFFFF, create_time=0, pool_type=0, sender_id=0, database_id=0):
         entry = minidom.Document().createElement('d')
