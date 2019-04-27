@@ -5,7 +5,7 @@ import time
 __all__ = ['download_line', 'download_file', 'download_dir']
 
 
-def download_line(line, tool, add_file_timestamp=False):
+def download_line(line, tool, add_file_timestamp=False, path='.'):
     print('Start download line: "%s".' % line.strip('\n'))
     line_res = tool.download(line)
     for item in line_res:
@@ -14,6 +14,7 @@ def download_line(line, tool, add_file_timestamp=False):
             tmp_1 = os.path.splitext(filename)
             timestamp = time.strftime('%Y%m%d%H%M%S', time.localtime())
             filename = tmp_1[0] + '_' + timestamp + tmp_1[1]
+        filename = os.path.join(path, filename)
         with open(filename, 'wb') as f:
             f.write(item['data'])
 
@@ -30,20 +31,13 @@ def download_file(filename, tool, add_dir_timestamp=False, add_file_timestamp=Fa
         out_dir = out_dir + '_' + timestamp
     if not os.path.exists(out_dir):
         os.mkdir(out_dir)
-    curdir = os.path.abspath(os.curdir)
-    try:
-        with open(filename, encoding='utf8') as f:
-            os.chdir(out_dir)
-            for line in f:
-                try:
-                    download_line(line, tool, add_file_timestamp=add_file_timestamp)
-                except Exception as e:
-                    print(e)
-                    continue
-    except Exception as e:
-        print(e)
-        return
-    os.chdir(curdir)
+    with open(filename, encoding='utf8') as f:
+        for line in f:
+            try:
+                download_line(line, tool, add_file_timestamp=add_file_timestamp, path=out_dir)
+            except Exception as e:
+                print(e)
+                continue
     print('Success generate dir: "%s" for list file.' % out_dir)
 
 
