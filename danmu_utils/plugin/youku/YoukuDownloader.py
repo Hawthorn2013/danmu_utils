@@ -48,11 +48,11 @@ class YoukuDownloader(IDownloader):
             danmu = danmus[0]
             try:
                 danmu_json = json.loads(danmu)
-                if danmu_json["count"] == 0:
-                    print("Section download finished: %s" % videoId)
-                    break
             except Exception as e:
                 print(e)
+                break
+            if danmu_json["count"] == 0:
+                print("Section download finished: %s" % videoId)
                 break
             try:
                 danmu_collect["count"] += danmu_json["count"]
@@ -68,11 +68,10 @@ class YoukuDownloader(IDownloader):
         line_params = line.strip('\n').split('\t')
         videoId = line_params[0]
         res = self._download(videoId)
-        if res != None:
-            item_res = {}
-            item_res['filename'] = videoId + '.' + self.DANMU_EXTNAME
-            item_res['data'] = res
-            line_res.append(item_res)
+        item_res = {}
+        item_res['filename'] = videoId + '.' + self.DANMU_EXTNAME
+        item_res['data'] = res
+        line_res.append(item_res)
         return line_res
 
 
