@@ -34,15 +34,27 @@ class IqiyiDownloader(IDownloader):
                 if e.code == 404:
                     break
                 else:
-                    raise(e)
+                    print(e)
+                    break
+            except Exception as e:
+                if isinstance(e, urllib.error.HTTPError) and e.code == 404:
+                    print('Download finished.')
+                else:
+                    print(e)
+                break
             text = zlib.decompress(body)
             cur_root = minidom.parseString(text.decode('utf-8'))
             if root == None:
                 root = cur_root
                 continue
-            data_tag = root.getElementsByTagName('danmu')[0].getElementsByTagName('data')[0]
-            cur_data_tag = cur_root.getElementsByTagName('danmu')[0].getElementsByTagName('data')[0]
-            data_tag.childNodes.extend(cur_data_tag.childNodes)
+            try:
+                data_tag = root.getElementsByTagName('danmu')[0].getElementsByTagName('data')[0]
+                cur_data_tag = cur_root.getElementsByTagName('danmu')[0].getElementsByTagName('data')[0]
+                data_tag.childNodes.extend(cur_data_tag.childNodes)
+            except Exception as e:
+                print(e)
+                break
+
         return root.toxml().encode('utf-8')
 
     def download(self, line):
@@ -50,11 +62,10 @@ class IqiyiDownloader(IDownloader):
         line_params = line.strip('\n').split('\t')
         tvId = line_params[0]
         res = self._download(tvId)
-        if res != None:
-            item_res = {}
-            item_res['filename'] = tvId + '.' + self.DANMU_EXTNAME
-            item_res['data'] = res
-            line_res.append(item_res)
+        item_res = {}
+        item_res['filename'] = tvId + '.' + self.DANMU_EXTNAME
+        item_res['data'] = res
+        line_res.append(item_res)
         return line_res
 
 
