@@ -23,30 +23,21 @@ class BilibiliDownloader(IDownloader):
         except zlib.error:
             return zlib.decompress(data)
 
-    def _download(self, aid=None):
-        if aid != None:
-            url = 'https://comment.bilibili.com/%s.xml' % (aid)
-            try:
-                with urllib.request.urlopen(url) as f:
-                    danmu = f.read()
-                try:
-                    danmu_deflate = self.__deflate(danmu)
-                    return danmu_deflate
-                except Exception as e:
-                    print(e)
-            except Exception as e:
-                print(e)
+    def _download(self, aid):
+        url = 'https://comment.bilibili.com/%s.xml' % (aid)
+        with urllib.request.urlopen(url) as f:
+            danmu = f.read()
+        return self.__deflate(danmu)
 
     def download(self, line):
         line_res = []
         line_params = line.strip('\n').split('\t')
         aid = line_params[0]
-        res = self._download(aid=aid)
-        if res != None:
-            item_res = {}
-            item_res['filename'] = aid + '.' + self.DANMU_EXTNAME
-            item_res['data'] = res
-            line_res.append(item_res)
+        res = self._download(aid)
+        item_res = {}
+        item_res['filename'] = aid + '.' + self.DANMU_EXTNAME
+        item_res['data'] = res
+        line_res.append(item_res)
         return line_res
 
 
