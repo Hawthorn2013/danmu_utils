@@ -40,10 +40,6 @@ class BilibiliDownloader(IDownloader):
     def download(self, line):
         line_res = []
         line_params = line.strip('\n').split('\t')
-        if len(line_params) < 1:
-            return False
-        if not line_params[0].isdecimal():
-            return False
         aid = line_params[0]
         res = self._download(aid=aid)
         if res != None:

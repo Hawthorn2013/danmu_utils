@@ -35,7 +35,11 @@ def download_file(filename, tool, add_dir_timestamp=False, add_file_timestamp=Fa
         with open(filename, encoding='utf8') as f:
             os.chdir(out_dir)
             for line in f:
-                download_line(line, tool, add_file_timestamp=add_file_timestamp)
+                try:
+                    download_line(line, tool, add_file_timestamp=add_file_timestamp)
+                except Exception as e:
+                    print(e)
+                    continue
     except Exception as e:
         print(e)
         return

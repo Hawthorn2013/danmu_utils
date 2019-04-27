@@ -39,12 +39,6 @@ class DiyidanDownloader(IDownloader):
     def download(self, line):
         line_res = []
         line_params = line.strip('\n').split('\t')
-        if len(line_params) < 2:
-            return False
-        if not line_params[0].isdecimal():
-            return False
-        if not line_params[1].isdecimal():
-            return False
         videoId = line_params[0]
         postId = line_params[1]
         res = self._download(videoId=videoId, postId=postId)

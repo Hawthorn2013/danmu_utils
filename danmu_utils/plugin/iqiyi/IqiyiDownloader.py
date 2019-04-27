@@ -48,8 +48,6 @@ class IqiyiDownloader(IDownloader):
     def download(self, line):
         line_res = []
         line_params = line.strip('\n').split('\t')
-        if len(line_params) < 1:
-            return line_res
         tvId = line_params[0]
         res = self._download(tvId)
         if res != None:
