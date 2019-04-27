@@ -39,7 +39,6 @@ class DiyidanDownloader(IDownloader):
     def download(self, line):
         line_res = []
         line_params = line.strip('\n').split('\t')
-        print('Start process line: "%s".' % line.strip('\n'))
         if len(line_params) < 2:
             return False
         if not line_params[0].isdecimal():

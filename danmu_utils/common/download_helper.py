@@ -6,6 +6,7 @@ __all__ = ['download_line', 'download_file', 'download_dir']
 
 
 def download_line(line, tool, add_file_timestamp=False):
+    print('Start download line: "%s".' % line.strip('\n'))
     line_res = tool.download(line)
     for item in line_res:
         filename = item['filename']

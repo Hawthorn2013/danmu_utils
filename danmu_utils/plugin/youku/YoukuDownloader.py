@@ -66,7 +66,6 @@ class YoukuDownloader(IDownloader):
     def download(self, line):
         line_res = []
         line_params = line.strip('\n').split('\t')
-        print('Start process item: "%s".' % line.strip('\n'))
         if len(line_params) < 1:
             return line_res
         if not line_params[0].isdecimal():
