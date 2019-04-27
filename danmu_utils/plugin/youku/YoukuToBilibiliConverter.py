@@ -23,11 +23,7 @@ class YoukuToBilibiliConverter(IConverter):
 
     def convert(self, data):
         bilibiliGenerator = BilibiliGenerator()
-        try:
-            item_src = json.loads(data)
-        except Exception as e:
-            print(e)
-            return None
+        item_src = json.loads(data)
         for entry_src in item_src['result']:
             try:
                 text = entry_src['content']
