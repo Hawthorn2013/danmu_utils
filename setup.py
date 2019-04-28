@@ -13,6 +13,9 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/Hawthorn2013/danmu_utils",
     packages=setuptools.find_packages(),
+    entry_points={
+        'console_scripts': ['danmuutils=danmu_utils.common.cmd_interface:main'],
+    },
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",

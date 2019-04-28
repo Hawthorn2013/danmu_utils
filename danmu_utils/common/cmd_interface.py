@@ -4,7 +4,7 @@ from danmu_utils.common.download_helper import *
 from danmu_utils.common.convert_helper import *
 
 
-if __name__ == '__main__':
+def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--action', required=True, choices=['download', 'convert'])
     parser.add_argument('--data-type', required=True, choices=['line', 'file', 'dir'])
@@ -40,3 +40,6 @@ if __name__ == '__main__':
     else:
         print('Illegal param: --action=%s' % args.action)
         exit(1)
+
+if __name__ == '__main__':
+    main()
